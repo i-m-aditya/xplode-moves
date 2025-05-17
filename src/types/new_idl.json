@@ -1,0 +1,408 @@
+{
+  "address": "7oEVduKtpfgYQYPWCdZoCYYwPp41Qeh2DJd3qZ7mWZaB",
+  "metadata": {
+    "name": "xplode_moves",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "commit_and_undelegate_game",
+      "docs": ["Commit and undelegate the game from ephemeral rollup"],
+      "discriminator": [109, 99, 188, 9, 198, 44, 89, 151],
+      "accounts": [
+        {
+          "name": "game_server",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "game_moves",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 97, 109, 101, 45, 112, 100, 97]
+              },
+              {
+                "kind": "account",
+                "path": "game_moves.game_id",
+                "account": "GameMoves"
+              }
+            ]
+          }
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        },
+        {
+          "name": "magic_context",
+          "writable": true,
+          "address": "MagicContext1111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "commit_game",
+      "docs": ["Manual commit the game state to base layer"],
+      "discriminator": [212, 148, 56, 92, 60, 28, 179, 66],
+      "accounts": [
+        {
+          "name": "game_server",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "game_moves",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 97, 109, 101, 45, 112, 100, 97]
+              },
+              {
+                "kind": "account",
+                "path": "game_moves.game_id",
+                "account": "GameMoves"
+              }
+            ]
+          }
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        },
+        {
+          "name": "magic_context",
+          "writable": true,
+          "address": "MagicContext1111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "delegate_game",
+      "docs": ["Delegate the game PDA to the ephemeral rollup"],
+      "discriminator": [116, 183, 70, 107, 112, 223, 122, 210],
+      "accounts": [
+        {
+          "name": "game_server",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "buffer_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [98, 117, 102, 102, 101, 114]
+              },
+              {
+                "kind": "account",
+                "path": "pda"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                100, 254, 24, 159, 112, 125, 189, 222, 171, 254, 87, 144, 33,
+                147, 194, 187, 74, 19, 179, 67, 164, 108, 167, 164, 252, 200,
+                100, 224, 97, 210, 193, 12
+              ]
+            }
+          }
+        },
+        {
+          "name": "delegation_record_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [100, 101, 108, 101, 103, 97, 116, 105, 111, 110]
+              },
+              {
+                "kind": "account",
+                "path": "pda"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "delegation_metadata_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100, 101, 108, 101, 103, 97, 116, 105, 111, 110, 45, 109, 101,
+                  116, 97, 100, 97, 116, 97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pda"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "pda",
+          "docs": ["CHECK The pda to delegate"],
+          "writable": true
+        },
+        {
+          "name": "owner_program",
+          "address": "7oEVduKtpfgYQYPWCdZoCYYwPp41Qeh2DJd3qZ7mWZaB"
+        },
+        {
+          "name": "delegation_program",
+          "address": "DELeGGvXpWV2fqJUhqcF5ZSYMS4JTLjteaAMARRSaeSh"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "game_id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "initialize_game",
+      "discriminator": [44, 62, 102, 247, 126, 208, 130, 215],
+      "accounts": [
+        {
+          "name": "game_moves",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 97, 109, 101, 45, 112, 100, 97]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "game_server",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "game_id",
+          "type": "string"
+        },
+        {
+          "name": "grid_size",
+          "type": "u8"
+        },
+        {
+          "name": "bomb_positions",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "Coordinates"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "process_undelegation",
+      "discriminator": [196, 28, 41, 206, 48, 37, 51, 167],
+      "accounts": [
+        {
+          "name": "base_account",
+          "writable": true
+        },
+        {
+          "name": "buffer"
+        },
+        {
+          "name": "payer",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "account_seeds",
+          "type": {
+            "vec": "bytes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "record_move",
+      "discriminator": [111, 244, 88, 207, 200, 48, 59, 2],
+      "accounts": [
+        {
+          "name": "game_moves",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 97, 109, 101, 45, 112, 100, 97]
+              },
+              {
+                "kind": "account",
+                "path": "game_moves.game_id",
+                "account": "GameMoves"
+              }
+            ]
+          }
+        },
+        {
+          "name": "game_server",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "player_name",
+          "type": "string"
+        },
+        {
+          "name": "cell",
+          "type": {
+            "defined": {
+              "name": "Coordinates"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GameMoves",
+      "discriminator": [210, 83, 181, 129, 143, 142, 163, 165]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidCell",
+      "msg": "Invalid cell coordinates"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidGridSize",
+      "msg": "Invalid grid size - must be <= 5"
+    }
+  ],
+  "types": [
+    {
+      "name": "Coordinates",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "x",
+            "type": "u8"
+          },
+          {
+            "name": "y",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GameMoves",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "game_id",
+            "type": "string"
+          },
+          {
+            "name": "grid_size",
+            "type": "u8"
+          },
+          {
+            "name": "bomb_positions",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Coordinates"
+                }
+              }
+            }
+          },
+          {
+            "name": "moves",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Move"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Move",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player_name",
+            "type": "string"
+          },
+          {
+            "name": "cell",
+            "type": {
+              "defined": {
+                "name": "Coordinates"
+              }
+            }
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}
